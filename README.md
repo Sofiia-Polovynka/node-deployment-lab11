@@ -70,9 +70,11 @@ node scripts/check-api.mjs http://localhost:4100 1.0.0 staging
 
 ## Результат роботи — заповнює студент
 
-- Команда локального запуску:
-- Параметри середовища:
-- Посилання на репозиторій:
-- Спосіб розгортання та URL або причина локального варіанта:
-- Результат перевірки версії 1.1.0 та її коміту:
-- Ресурси, які зупинено або видалено:
+## Результат роботи — заповнює студент
+
+- Команда локального запуску: спочатку встановлюю залежності командою `npm ci`, потім запускаю сервер командою `npm run dev`. Сервер працює на http://localhost:4100, налаштування бере з мого файлу .env (його я в Git не додавала).
+- Параметри середовища: PORT, NODE_ENV, APP_ENV та APP_MESSAGE. Локально я використовувала PORT=4100, NODE_ENV=production, APP_ENV=staging. На Render я задала NODE_ENV=production, APP_ENV=production і APP_MESSAGE="Практична 11 — Половинка, ІТ-31/2". PORT я не вказувала, бо Render передає його сам (у журналі було 10000).
+- Посилання на репозиторій: https://github.com/Sofiia-Polovynka/node-deployment-lab11
+- Спосіб розгортання та URL або причина локального варіанта: я розгорнула API на Render Free як Web Service з командами `npm ci` (збирання) і `npm start` (запуск). Health Check Path — /ready, Auto-Deploy — After CI Checks Pass, тобто нова версія публікується тільки після того, як GitHub Actions успішно виконає `npm ci` і `npm test`. Адреса сервісу: https://lab11-sofiia-polovynka-api.onrender.com
+- Результат перевірки версії 1.1.0 та її коміту: я змінила версію в src/release.js на 1.1.0, зробила коміт 7384760 «Publish API version 1.1.0» і відправила його на GitHub. Після успішного CI Render сам розгорнув цей коміт. Команда `node scripts/check-api.mjs https://lab11-sofiia-polovynka-api.onrender.com 1.1.0 production` вивела «API checks passed». Revision у відповіді (738476094dfe7472ca2a1c7751aa1028e5c4c420) збігся з результатом `git rev-parse HEAD`.
+- Ресурси, які зупинено або видалено: Codespaces я не використовувала, тому нічого видаляти не довелося. Сервіс на Render Free я залишила працювати, щоб викладач міг його перевірити. Він безкоштовний і без платіжних даних, а після простою засинає, тому перший запит може тривати до 50 секунд.
